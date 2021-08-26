@@ -54,7 +54,7 @@ table {
 	height: 100px;
 	margin: 10px;
 	padding: 5px;
-	/* background-color: gray; */
+	background-color:	skyblue;
 	flex-direction: row;
 	justify-content: space-between;
 }
@@ -67,14 +67,12 @@ table {
 	display: flex; 	
 	padding-right: 20px;
 	padding-top:10px;
-	/* background-color:red; */
 }
 
 .nav-menu {
 	border-style: solid;
 	border-color: block;
 	margin: 15px;
-	/* margin-top: 10px; */
 	font-size: 40px;
 	font-style: oblique;
 }
@@ -85,8 +83,16 @@ table {
 }
 
 .content {
+	padding:10px;
+   	padding-bottom:60px;
+}
+
+.main-content {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
 }
 
 .content-title {
@@ -96,4 +102,36 @@ table {
 	font-size: 40px;
 	font-family: "Times New Roman", Times, serif;
 	font-weight: bold;
+}
+
+p {
+	position: relative;
+	justify-content: center;
+	width: 40%;
+	padding: 10px;
+	text-align: left;
+	font-size: 20px;
+}
+
+.content-img {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	border: 1px solid black;
+}
+
+
+.footer {
+	position: relative;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	padding-top: 20px;
+	background-color: gray;
+    height: 80px;
+    /* margi-top: -100px; */
+}
+
+.footer-content {
+	margin: 10px;
 }
