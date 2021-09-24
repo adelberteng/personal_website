@@ -65,6 +65,14 @@ table {
 
 .header-right {
 	display: flex; 	
+	flex-direction: row;	
+	padding-right: 20px;
+	padding-top:10px;
+}
+
+.nav-menu-bar {
+	display: flex; 	
+	flex-direction: row;	
 	padding-right: 20px;
 	padding-top:10px;
 }
@@ -83,7 +91,8 @@ table {
 }
 
 .content {
-	padding:10px;
+	padding: 20px;
+	padding-top:50px;
    	padding-bottom:60px;
 }
 
