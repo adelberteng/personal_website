@@ -125,6 +125,8 @@ nav li {
 } 
 
 .main {
+	margin-left: 20%;
+	margin-right: 20%;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -132,22 +134,37 @@ nav li {
 	align-items: center;
 }
 
-.main p {
-	position: relative;
-	justify-content: center;
-	width: 40%;
+.main h1 {
+	padding: 10px;
+	font-size: 400%;
+	font-family: "Times New Roman", Times, serif;
+	font-weight: bold;
+}
+
+.main h2 {
+	width: 60%;
 	padding: 10px;
 	text-align: left;
 	font-size: 25px;
-}
-
-.content-title {
-	display: flex;
-	justify-content: center;
-	padding: 10px;
-	font-size: 40px;
+	font-size: 300%;
 	font-family: "Times New Roman", Times, serif;
 	font-weight: bold;
+}
+
+.main h3 {
+	width: 60%;
+	text-align: left;
+	padding: 10px;
+	font-size: 200%;
+	font-family: "Times New Roman", Times, serif;
+	font-weight: bold;
+}
+
+.main p {
+	width: 90%;
+	padding: 10px;
+	text-align: left;
+	font-size: 25px;
 }
 
 .content-img {
