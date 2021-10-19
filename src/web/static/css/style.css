@@ -136,7 +136,7 @@ nav li {
 
 .main h1 {
 	padding: 10px;
-	font-size: 400%;
+	font-size: 250%;
 	font-family: "Times New Roman", Times, serif;
 	font-weight: bold;
 }
@@ -145,8 +145,7 @@ nav li {
 	width: 60%;
 	padding: 10px;
 	text-align: left;
-	font-size: 25px;
-	font-size: 300%;
+	font-size: 200%;
 	font-family: "Times New Roman", Times, serif;
 	font-weight: bold;
 }
@@ -155,7 +154,7 @@ nav li {
 	width: 60%;
 	text-align: left;
 	padding: 10px;
-	font-size: 200%;
+	font-size: 150%;
 	font-family: "Times New Roman", Times, serif;
 	font-weight: bold;
 }
@@ -173,3 +172,6 @@ nav li {
 	justify-content: center;
 }
 
+.footer {
+	margin-top: 10%;
+}
