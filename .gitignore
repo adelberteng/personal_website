@@ -38,7 +38,7 @@ _template/*
 
 
 # Environments
-conf/*
+# conf/*
 venv/
 .python-version
 pyvenv.cfg
