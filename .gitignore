@@ -51,3 +51,6 @@ pyvenv.cfg
 htmlcov/
 .coverage
 .coverage.*
+
+# HTTPS
+.well-known

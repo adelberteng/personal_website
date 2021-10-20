@@ -172,6 +172,20 @@ nav li {
 	justify-content: center;
 }
 
+#accordionFlush {
+	width: 80%;
+}
+
+.accordion-button {
+	font-size: 100%;
+}
+
+.accordion-body li {
+	margin: 15px;
+	font-size: 200%;
+}
+
+
 .footer {
 	margin-top: 10%;
 }
