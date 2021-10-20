@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+	<h1>Login Page</h1>
 	<form method="post" action="/login">
 		<div class="mb-3">
 		<label class="form-label">Username</label>
-		<input type="text" class="form-control" name="username" placeholder="Username">
+		<input type="text" class="form-control" name="username" placeholder="Your username">
 		</div>
 		<div class="mb-3">
 		<label class="form-label">Password</label>
-		<input type="password" class="form-control" name="password" placeholder="Password">
+		<input type="password" class="form-control" name="password" placeholder="Your password">
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>

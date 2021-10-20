@@ -185,6 +185,14 @@ nav li {
 	font-size: 200%;
 }
 
+.form-adjust {
+	width: 50%;
+}
+
+#register-form-warning {
+	color: red;
+	text-align: center;
+}
 
 .footer {
 	margin-top: 10%;

@@ -1,14 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<h1>Hello! I am Albert Teng.<br>Welcome to my website!</h1>
-	<p class="content-img"><img src="./static/img/personal_pic.png" alt="personal_pic" width="450"></p>
-	<p>
-		I am a software developer and have a great deal of experience with backend development, data processing and cloud service.
-	</p>
-	<p>
-		You can find more information in About page which on navigation bar, or read some articles written by me in my Blog page.
-	</p>
-	<p>If you are interested, trying the demonstrations by clicking Portfoilo on navigation bar.</p>
+	<h1>Register Page</h1>
+	<p id="register-form-warning">{{ not_match_warning }}</p>
+	<form method="post" action="/register" class="form-adjust">
+		<div class="mb-3">
+		<label class="form-label">Username</label>
+		<input type="text" class="form-control" name="username" placeholder="Your username">
+		</div>
+		<div class="mb-3">
+		<label class="form-label">Password</label>
+		<input type="password" class="form-control" name="password" placeholder="Your password">
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Password</label>
+			<input type="password" class="form-control" name="password_repeat" placeholder="Type your password again.">
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
 {% endblock %}
 
