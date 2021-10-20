@@ -35,7 +35,7 @@ MANIFEST
 _build/*
 _static/*
 _template/*
-
+include/*
 
 # Environments
 # conf/*
