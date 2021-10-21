@@ -189,9 +189,9 @@ nav li {
 	width: 50%;
 }
 
-#register-form-warning {
+.form-warning {
 	color: red;
-	text-align: center;
+	text-align: center !important;
 }
 
 .footer {

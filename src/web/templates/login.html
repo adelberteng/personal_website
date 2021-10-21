@@ -3,7 +3,7 @@
 {% block content %}
 	<h1>Login Page</h1>
 	<form method="post" action="/login">
-		{{ form.csrf_token }}
+		<p class="form-warning">{{ login_warning }}</p>
 		<div class="mb-3">
 		{{ form.username.label }} 
 		{{ form.username() }}
@@ -17,6 +17,8 @@
 		<div class="mb-3">
 			{{ form.remember() }}
 			{{ form.remember.label }} 
+			<span>&emsp;</span>
+			<a href="/register">registered yet?</a>
 		<!-- <input type="password" class="form-control" name="password" placeholder="Your password"> -->
 		</div>
 		{{ form.submit() }}
