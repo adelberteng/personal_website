@@ -6,6 +6,7 @@ temp
 *.py[cod]
 *.so
 .coverage
+test.py
 
 # OS generated
 .DS_Store*
@@ -42,6 +43,7 @@ include/*
 venv/
 .python-version
 pyvenv.cfg
+.env
 
 
 # Unit test / coverage reports

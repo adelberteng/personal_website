@@ -7,19 +7,16 @@
 		<div class="mb-3">
 		{{ form.username.label }} 
 		{{ form.username() }}
-		<!-- <input type="text" class="form-control" name="username" placeholder="Your username"> -->
 		</div>
 		<div class="mb-3">
 			{{ form.password.label }} 
 			{{ form.password() }}
-		<!-- <input type="password" class="form-control" name="password" placeholder="Your password"> -->
 		</div>
 		<div class="mb-3">
 			{{ form.remember() }}
 			{{ form.remember.label }} 
 			<span>&emsp;</span>
-			<a href="/register">registered yet?</a>
-		<!-- <input type="password" class="form-control" name="password" placeholder="Your password"> -->
+			<a href="/register"> Haven't signed up yet?</a>
 		</div>
 		{{ form.submit() }}
 	</form>

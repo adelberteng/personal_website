@@ -30,7 +30,7 @@ def register():
 		if password_repeat != password:
 			not_match_warning = "Two of your passwords does not match, Please retry again."
 			return render_template("register.html", not_match_warning = not_match_warning)
-		# save user info to db
+		# todo: save user info to db
 
 		return redirect(url_for("login"))
 

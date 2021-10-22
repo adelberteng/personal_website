@@ -1,4 +1,12 @@
+gcloud
+google-cloud-secret-manager
 Flask
 Flask-WTF
 gunicorn
 gevent
+
+SQLAlchemy
+pymysql
+cryptography
+
+line-bot-sdk
