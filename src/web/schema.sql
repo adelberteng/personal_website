@@ -2,12 +2,14 @@
 -- Drop any existing data and create empty tables.
 
 DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS merchandise;
+DROP TABLE IF EXISTS order;
 DROP TABLE IF EXISTS post;
 
 CREATE TABLE user (
   uid INTEGER PRIMARY KEY AUTOINCREMENT,
-  username TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL
+  username VARCHAR(32) UNIQUE NOT NULL,
+  password_hash VARCHAR(128) NOT NULL
 );
 
 -- shopping cart system 
@@ -30,12 +32,25 @@ CREATE TABLE order (
   FOREIGN KEY (merchandise_id) REFERENCES merchandise (merchandise_id)
 );
 
--- blog system
-CREATE TABLE post (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  author_id INTEGER NOT NULL,
-  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  title TEXT NOT NULL,
-  body TEXT NOT NULL,
-  FOREIGN KEY (author_id) REFERENCES user (id)
+-- reservation system
+CREATE TABLE place (
+  place_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  
 );
+
+CREATE TABLE reservation (
+  reservation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  
+);
+
+
+
+-- blog system
+-- CREATE TABLE post (
+--   id INTEGER PRIMARY KEY AUTOINCREMENT,
+--   author_id INTEGER NOT NULL,
+--   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--   title TEXT NOT NULL,
+--   body TEXT NOT NULL,
+--   FOREIGN KEY (author_id) REFERENCES user (id)
+-- );

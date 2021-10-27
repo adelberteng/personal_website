@@ -38,6 +38,9 @@ def register():
 def change_password():
 	pass
 
+def this_website():
+	return render_template("this_website.html")
+
 def blog():
 	return render_template("blog.html")
 
