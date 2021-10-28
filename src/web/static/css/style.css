@@ -142,7 +142,7 @@ nav li {
 }
 
 .main h2 {
-	width: 60%;
+	width: 90%;
 	padding: 10px;
 	text-align: left;
 	font-size: 200%;
@@ -151,13 +151,14 @@ nav li {
 }
 
 .main h3 {
-	width: 60%;
-	text-align: left;
+	width: 90%;
 	padding: 10px;
+	text-align: left;
 	font-size: 150%;
 	font-family: "Times New Roman", Times, serif;
 	font-weight: bold;
 }
+
 
 .main p {
 	width: 90%;
@@ -193,6 +194,7 @@ nav li {
 	color: red;
 	text-align: center !important;
 }
+
 
 .footer {
 	margin-top: 10%;

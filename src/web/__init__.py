@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from web.route import index 
 from web.route import login
 from web.route import register
+from web.route import about
 from web.route import this_website
 from web.route import not_implement
 from web.route import blog
@@ -28,6 +29,7 @@ def create_app():
     app.add_url_rule("/", endpoint="index", view_func=index)
     app.add_url_rule("/login", "login", login, methods=methods)
     app.add_url_rule("/register", "register", register, methods=methods)
+    app.add_url_rule("/about", "about", about)
     app.add_url_rule("/this_website", "this_website", this_website)
     app.add_url_rule("/not_implement", "not_implement", not_implement)
     app.add_url_rule("/blog", "blog", blog)
