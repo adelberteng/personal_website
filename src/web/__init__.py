@@ -5,13 +5,13 @@ from flask_migrate import Migrate
 # csrf = CSRFProtect()
 
 from web.route import index 
-from web.route import login
-from web.route import register
 from web.route import about
 from web.route import this_website
 from web.route import not_implement
 from web.route import blog
 from web.route import linebot_addfd
+from web.auth import login
+from web.auth import register
 from web import linebot
 
 db = SQLAlchemy()
