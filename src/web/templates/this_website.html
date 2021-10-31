@@ -1,29 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<h1>About this website</h1>
-	<h2>Overview</h2>
-	
-	<p>
-		Hi! thanks again, I am pretty glad you have interested in my website.<br>
-		The reason why I built this website is because I want a place where can show my side projects 
-		and let other people know more about me.
-	</p>
-	<p class="content-img"><img src="./static/img/web_structure.png" alt="web_structure" width="100%"></p>
-	<p>
-		The website structure is shown above, this project is running on Google Compute Engine, 
-		which is the compute instance on Google Cloud Platform.
-		It builds with three different components (Proxy server, Web application and Database) 
-		and all of them are run inside the container.<br>
-		Source code is available at <a href="https://github.com/adelberteng/personal_website" target="_blank">Github</a>.
-	</p>
-	<h2>Web Application</h2>
-	<p>
-		Python is the programming language mainly used by me, 
-		so I decided to use Flask to be the web application framework 
-		and add Gunicorn to the front as a wsgi web server for improving performance.<br>
+    <h1>About this website</h1>
+    <h2>Overview</h2>
+    
+    <p>
+        Hi! thanks again, I am pretty glad you have interested in my website.<br>
+        The reason why I built this website is because I want a place where can show my side projects 
+        and let people know more about me.
+    </p>
+    <p class="content-img"><img src="./static/img/web_structure.png" alt="web_structure" width="100%"></p>
+    <p>
+        The website structure is shown above, this project is running on Google Compute Engine, 
+        which is the compute instance on Google Cloud Platform.
+        It builds with three different components (Proxy server, Web application and Database) 
+        and all of them are run inside the container.<br>
+        Source code is available at <a href="https://github.com/adelberteng/personal_website" target="_blank">Github</a>.
+    </p>
+    <h2>Web Application</h2>
+    <p>
+        Python is the programming language mainly used by me, 
+        so I decided to use Flask to be the web application framework 
+        and add Gunicorn to the front as a wsgi web server for improving performance.<br>
 
-	</p>
-	
+    </p>
+
 {% endblock %}
 
