@@ -3,6 +3,9 @@ from flask import g
 from flask.cli import with_appcontext
 from sqlalchemy import create_engine
 
+from .config import Config
+conf = Config.load(env="dev")
+
 
 def get_db():
     if "db" not in g:
