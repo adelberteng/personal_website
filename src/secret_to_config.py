@@ -24,8 +24,8 @@ version_id = "3"
 name = f"projects/{project_id}/secrets/{secret_id}/versions/{version_id}"
 
 client = secretmanager.SecretManagerServiceClient()
-response = client.access_secret_version(request={"name": name})
-payload = response.payload.data.decode("UTF-8")
+res = client.access_secret_version(request={"name": name})
+payload = res.payload.data.decode("UTF-8")
 secret = ast.literal_eval(payload)
 
 top_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

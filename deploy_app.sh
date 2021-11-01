@@ -1,4 +1,5 @@
 #!/bin/bash
+# python3 ./src/secret_to_config.py
 rm ./nginx_conf/nginx.conf
 cp ./nginx_conf/nginx_base.conf ./nginx_conf/nginx.conf
 docker-compose -f ./docker/docker-compose.yaml up -d
