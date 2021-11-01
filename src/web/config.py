@@ -2,19 +2,13 @@ import os
 from configparser import ConfigParser
 
 class Config:
-	__TOP_DIR_PATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-	__DEFAULT_CONF_PATH = os.path.join(__TOP_DIR_PATH, "conf/config.ini")
-
-	__DEFAULT_ENV = "dev" 
+	_default_env = "dev"
+	_top_dir_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+	_default_conf_path = os.path.join(_top_dir_path, "conf/config.ini")
 
 	@staticmethod
-	def load(env=__DEFAULT_ENV, path=__DEFAULT_CONF_PATH):
+	def load(env= _default_env, path=_default_conf_path):
 		config = ConfigParser()
 		config.read(path, encoding='utf-8')
 
 		return config[env]
-
-
-if __name__ == '__main__':
-	config = Config.load(env="dev")
-	print(config["MYSQL_DATABASE"])
