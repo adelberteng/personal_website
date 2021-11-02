@@ -11,6 +11,7 @@ from werkzeug.security import generate_password_hash
 
 from .forms import LoginForm
 from .forms import RegisterForm
+from .db import get_db
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -27,32 +28,45 @@ def login_required(view):
 
     return wrapped_view
 
-
+@bp.route("/login", methods=("GET", "POST"))
 def login():
     form = LoginForm(csrf_enabled=False)
     if request.method == 'POST':
         username = form.username.data
         password = form.password.data
+        # db = g.db
+        # password_hash = db.execute(
+        #     f"SELECT password_hash FROM user WHERE username = '{username}'")
+
+        # if not check_password_hash(password_hash, password):
+        #     login_warning = "the password is incorrect, please try again."
+        #     return redirect(url_for("login"), login_warning = login_warning)
 
         return redirect(url_for("index"))
 
     else:
-        return render_template("login.html", form = form)
+        return render_template("auth/login.html", form = form)
     
+@bp.route("/register", methods=("GET", "POST"))
 def register():
     form = RegisterForm(csrf_enabled=False)
     if request.method == 'POST':
         username = form.username.data
         password = form.password.data
-        password_repeat = request.form.get("password_repeat")
+        password_repeat = form.password_repeat.data
         if password_repeat != password:
-            not_match_warning = "Two of your passwords does not match, Please retry again."
-            return render_template("register.html", not_match_warning = not_match_warning)
-        # todo: save user info to db
+            not_match_warning = (
+                "Two of your passwords does not match, "
+                "Please retry again."
+            )
+            return render_template(
+                "auth/register.html", not_match_warning = not_match_warning)
+
+        # TODO: save user into to db
 
         return redirect(url_for("login"))
     else:
-        return render_template("register.html")
+        return render_template("auth/register.html", form = form)
         
 
 

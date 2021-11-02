@@ -1,3 +1,4 @@
+# route.py deals with regular page.
 from flask import render_template
 
 

@@ -12,8 +12,7 @@ from web.route import this_website
 from web.route import not_implement
 from web.route import blog
 from web.route import linebot_addfd
-from web.auth import login
-from web.auth import register
+from web import auth
 from web import linebot
 
 db = SQLAlchemy()
@@ -33,14 +32,13 @@ def create_app():
         return send_from_directory(app.static_folder, request.path[1:])
 
     app.add_url_rule("/", endpoint="index", view_func=index)
-    app.add_url_rule("/login", "login", login, methods=methods)
-    app.add_url_rule("/register", "register", register, methods=methods)
     app.add_url_rule("/about", "about", about)
     app.add_url_rule("/this_website", "this_website", this_website)
     app.add_url_rule("/not_implement", "not_implement", not_implement)
     app.add_url_rule("/blog", "blog", blog)
     app.add_url_rule("/linebot_addfd", "linebot_addfd", linebot_addfd)
 
+    app.register_blueprint(auth.bp)
     app.register_blueprint(linebot.bp)
 
     return app

@@ -1,3 +1,4 @@
+import click
 from flask import current_app
 from flask import g
 from flask.cli import with_appcontext
@@ -6,13 +7,16 @@ from sqlalchemy import create_engine
 from .config import Config
 conf = Config.load(env="dev")
 
-database = conf.get("")
-MYSQL_USER=user
-MYSQL_PASSWORD=password
+database = conf.get("MYSQL_DATABASE")
+mysql_user = conf.get("MYSQL_USER")
+mysql_password = conf.get("MYSQL_PASSWORD")
 
 def get_db():
     if "db" not in g:
-        g.db = sqlalchemy.create_engine("")
+        g.db = create_engine(
+            f"mysql+pymysql://{mysql_user}:{mysql_password}@"
+            f"localhost:3306/{database}"
+        )
 
     return g.db
 
@@ -23,7 +27,6 @@ def close_db(e=None):
     if db is not None:
         db.close()
 
-
 def init_db():
     db = get_db()
     with open("schema.sql", 'r', encoding='utf-8') as f:
@@ -32,11 +35,12 @@ def init_db():
     db.execute(sql_text)
 
 
-# @click.command("init-db")
-# @with_appcontext
-# def init_db_command():
-#     init_db()
-#     click.echo("Initialized the database.")
+
+@click.command("init-db")
+@with_appcontext
+def init_db_command():
+    init_db()
+    click.echo("Initialized the database.")
 
 
 # def init_app(app):
