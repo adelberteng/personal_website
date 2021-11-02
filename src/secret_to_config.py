@@ -34,11 +34,11 @@ config_path = f"{top_dir}/conf/config.ini"
 mysql_env_path = f"{top_dir}/conf/.mysql_env"
 
 with open(config_path, "w") as f:
-	f.write("[dev]\n")
-	for k, v in secret.items():
-		f.write(f"{k}={v}\n")
+    f.write("[dev]\n")
+    for k, v in secret.items():
+        f.write(f"{k}={v}\n")
 
 with open(mysql_env_path, "w") as f:
-	for k, v in secret.items():
-		if re.match(r"MYSQL*", k):
-			f.write(f"{k}={v}\n")
+    for k, v in secret.items():
+        if re.match(r"MYSQL*", k):
+            f.write(f"{k}={v}\n")
