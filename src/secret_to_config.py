@@ -31,10 +31,11 @@ secret = ast.literal_eval(payload)
 
 top_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = f"{top_dir}/conf/config.ini"
-mysql_env_path = f"{top_dir}/conf/.mysql_env"
+mysql_env_path = f"{top_dir}/conf/mysql_env"
 
 with open(config_path, "w") as f:
     f.write("[dev]\n")
+    f.write(f"secret_key={os.urandom(12)}\n")
     for k, v in secret.items():
         f.write(f"{k}={v}\n")
 

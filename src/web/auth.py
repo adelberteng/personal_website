@@ -6,6 +6,8 @@ from flask import redirect
 from flask import url_for
 from flask import render_template
 from flask import g
+from flask import flash
+from sqlalchemy.engine import url
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 
@@ -28,9 +30,23 @@ def login_required(view):
 
     return wrapped_view
 
+# @bp.before_app_request
+# def load_logged_in_user():
+#     """If a user id is stored in the session, load the user object from
+#     the database into ``g.user``."""
+#     user_id = session.get("user_id")
+
+#     if user_id is None:
+#         g.user = None
+#     else:
+#         g.user = (
+#             get_db().execute("SELECT * FROM user WHERE id = ?", (user_id,)).fetchone()
+#         )
+
 @bp.route("/login", methods=("GET", "POST"))
 def login():
-    form = LoginForm(csrf_enabled=False)
+    # csrf_enabled=False
+    form = LoginForm()
     if request.method == 'POST':
         username = form.username.data
         password = form.password.data
@@ -49,7 +65,7 @@ def login():
     
 @bp.route("/register", methods=("GET", "POST"))
 def register():
-    form = RegisterForm(csrf_enabled=False)
+    form = RegisterForm()
     if request.method == 'POST':
         username = form.username.data
         password = form.password.data
@@ -60,11 +76,14 @@ def register():
                 "Please retry again."
             )
             return render_template(
-                "auth/register.html", not_match_warning = not_match_warning)
+                "auth/register.html", 
+                form = form, 
+                not_match_warning = not_match_warning
+            )
 
-        # TODO: save user into to db
+        # todo: save user into to db
 
-        return redirect(url_for("login"))
+        return redirect(url_for("auth.login"))
     else:
         return render_template("auth/register.html", form = form)
         
@@ -72,3 +91,9 @@ def register():
 
 def change_password():
     pass
+
+@bp.route("/logout")
+def logout():
+    """Clear the current session, including the stored user id."""
+    session.clear()
+    return redirect(url_for("index"))

@@ -1,5 +1,7 @@
 # route.py deals with regular page.
 from flask import render_template
+from flask import jsonify
+from flask import current_app
 
 
 def index():

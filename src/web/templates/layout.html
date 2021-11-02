@@ -52,7 +52,11 @@
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="{{ url_for('this_website') }}">This Website</a></li>
-							<li><a class="dropdown-item" href="{{ url_for('auth.login') }}">Login</a></li>
+							{% if g.user %}
+								<li><a class="dropdown-item" href="{{ url_for('auth.login') }}">Logout</a></li>
+							{% else %}
+								<li><a class="dropdown-item" href="{{ url_for('auth.login') }}">Login / Signup</a></li>
+							{% endif %}
 							<li><a class="dropdown-item" href="{{ url_for('not_implement') }}">Shopping Cart</a></li>
 							<li><a class="dropdown-item" href="{{ url_for('not_implement') }}">Reservation System</a></li>
 							<li><a class="dropdown-item" href="{{ url_for('linebot_addfd') }}">Linebot</a></li>
@@ -87,6 +91,11 @@
 			</div>
 		</div>
 	</nav>	
+	{% if not g.user %}
+		<div id="user-hello">
+			<p font-size="200px">Hello! {{ g.user }}</p>
+		</div>
+	{% endif %}
 	<div class="content">
 		<div class="main">
 			{% block content %} {% endblock %}

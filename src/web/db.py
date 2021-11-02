@@ -4,19 +4,12 @@ from flask import g
 from flask.cli import with_appcontext
 from sqlalchemy import create_engine
 
-from .config import Config
-conf = Config.load(env="dev")
 
-database = conf.get("MYSQL_DATABASE")
-mysql_user = conf.get("MYSQL_USER")
-mysql_password = conf.get("MYSQL_PASSWORD")
 
 def get_db():
     if "db" not in g:
         g.db = create_engine(
-            f"mysql+pymysql://{mysql_user}:{mysql_password}@"
-            f"localhost:3306/{database}"
-        )
+            current_app.config.get("SQLALCHEMY_DATABASE_URI"))
 
     return g.db
 

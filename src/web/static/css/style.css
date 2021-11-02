@@ -118,6 +118,15 @@ nav li {
 	max-height: 100%;    
 }
 
+#user-hello {
+	padding: 20px;
+	padding-right: 50px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	font-size: 30px;
+}
+
 .content {
 	padding: 20px;
 	padding-top:50px;

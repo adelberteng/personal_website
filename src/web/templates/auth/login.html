@@ -2,7 +2,8 @@
 
 {% block content %}
 	<h1>Login Page</h1>
-	<form method="post" action="/login">
+	<form method="post" action="/auth/login">
+		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 		<p class="form-warning">{{ login_warning }}</p>
 		<div class="row mb-3">
 			{{ form.username.label }} 
