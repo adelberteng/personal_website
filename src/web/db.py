@@ -6,10 +6,13 @@ from sqlalchemy import create_engine
 from .config import Config
 conf = Config.load(env="dev")
 
+database = conf.get("")
+MYSQL_USER=user
+MYSQL_PASSWORD=password
 
 def get_db():
     if "db" not in g:
-        g.db = sqlalchemy.create_engine()
+        g.db = sqlalchemy.create_engine("")
 
     return g.db
 

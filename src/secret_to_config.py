@@ -10,6 +10,7 @@
 # https://cloud.google.com/community/tutorials/secrets-manager-python
 
 import os
+import re
 import ast
 
 from google.cloud import secretmanager
@@ -30,8 +31,14 @@ secret = ast.literal_eval(payload)
 
 top_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 config_path = f"{top_dir}/conf/config.ini"
+mysql_env_path = f"{top_dir}/conf/.mysql_env"
 
 with open(config_path, "w") as f:
 	f.write("[dev]\n")
 	for k, v in secret.items():
-		f.write(f"{k} = {v}\n")
+		f.write(f"{k}={v}\n")
+
+with open(mysql_env_path, "w") as f:
+	for k, v in secret.items():
+		if re.match(r"MYSQL*", k):
+			f.write(f"{k}={v}\n")

@@ -44,6 +44,8 @@ venv/
 .python-version
 pyvenv.cfg
 .env
+config.ini
+.mysql_env
 
 
 # Unit test / coverage reports
