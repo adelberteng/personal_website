@@ -53,7 +53,7 @@
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="{{ url_for('this_website') }}">This Website</a></li>
 							{% if g.user %}
-								<li><a class="dropdown-item" href="{{ url_for('auth.login') }}">Logout</a></li>
+								<li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a></li>
 							{% else %}
 								<li><a class="dropdown-item" href="{{ url_for('auth.login') }}">Login / Signup</a></li>
 							{% endif %}
@@ -93,7 +93,7 @@
 	</nav>	
 	{% if g.user %}
 		<div id="user-hello">
-			<p font-size="200px">Hello! {{ g.user }}</p>
+			<p">Hello! {{ g.user }}</p>
 		</div>
 	{% endif %}
 	<div class="content">

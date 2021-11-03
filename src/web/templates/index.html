@@ -1,6 +1,15 @@
 {% extends "layout.html" %}
 
 {% block content %}
+	{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <script type="text/javascript">
+        alert('{{ message }}');
+    </script>  
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 	<p class="content-img"><img src="./static/img/index_pic.gif" alt="index_pic" width="50%"></p>
 	<h2>
 		Hi there!

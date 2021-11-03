@@ -2,9 +2,18 @@
 
 {% block content %}
 	<h1>Login Page</h1>
+	{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <script type="text/javascript">
+        alert('{{ message }}');
+    </script>  
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 	<form method="post" action="/auth/login">
+		<p class="page-alert">{{ page_alert }}</p>
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-		<p class="form-warning">{{ login_warning }}</p>
 		<div class="row mb-3">
 			{{ form.username.label }} 
 			{{ form.username() }}

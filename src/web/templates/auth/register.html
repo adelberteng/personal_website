@@ -1,25 +1,33 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	<h1>Register Page</h1>
-	<p class="form-warning">{{ not_match_warning }}</p>
-	<form class="form form-horizontal" method="post" action="/auth/register">
-		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-		<div class="row mb-3">
-			{{ form.username.label }} 
-			{{ form.username() }}
-		</div>
-		<div class="row mb-3">
-			{{ form.password.label }} 
-			{{ form.password() }}
-		</div>
-		<div class="row mb-3">
-			{{ form.password_repeat.label }} 
-			{{ form.password_repeat(placeholder="entry password again.") }}
-		</div>
-		<div class="col-auto">
-			{{ form.submit() }}
-		</div>
-	</form>
+    <h1>Register Page</h1>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <script type="text/javascript">
+        alert('{{ message }}');
+    </script>  
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form class="form form-horizontal" method="post" action="/auth/register">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <div class="row mb-3">
+            {{ form.username.label }} 
+            {{ form.username() }}
+        </div>
+        <div class="row mb-3">
+            {{ form.password.label }} 
+            {{ form.password() }}
+        </div>
+        <div class="row mb-3">
+            {{ form.password_repeat.label }} 
+            {{ form.password_repeat(placeholder="entry password again.") }}
+        </div>
+        <div class="col-auto">
+            {{ form.submit() }}
+        </div>
+    </form>
 {% endblock %}
 

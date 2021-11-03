@@ -15,40 +15,23 @@ from web.route import blog
 from web.route import linebot_addfd
 from web import auth
 from web import linebot
+from web.db import init_db
 
-from .config import Config
-conf = Config.load(env="dev")
-
-database = conf.get("MYSQL_DATABASE")
-mysql_user = conf.get("MYSQL_USER")
-mysql_password = conf.get("MYSQL_PASSWORD")
-mysql_endpoint = "localhost"
-mysql_port = 3306
-secret_key = conf.get("secret_key")
+from .config import AppConfig
 
 db = SQLAlchemy()
-migrate = Migrate()
+# migrate = Migrate()
 
 
 def create_app():
     app = Flask(__name__)
-
-    app.config["SQLALCHEMY_DATABASE_URI"] = (
-        f"mysql+pymysql://{mysql_user}:{mysql_password}@"
-        f"{mysql_endpoint}:{mysql_port}/{database}"
-    )
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = secret_key
+    app.config.from_object(AppConfig)
 
     csrf = CSRFProtect()
     csrf.init_app(app)
 
     db.init_app(app)
-    migrate.init_app(app, db)
-
-    @app.route('/robots.txt')
-    def static_from_root():
-        return send_from_directory("/robots.txt")
+    # migrate.init_app(app, db)
 
     app.add_url_rule("/", endpoint="index", view_func=index)
     app.add_url_rule("/about", "about", about)
@@ -59,6 +42,10 @@ def create_app():
 
     app.register_blueprint(auth.bp)
     app.register_blueprint(linebot.bp)
+
+    @app.route('/robots.txt')
+    def static_from_root():
+        return send_from_directory("/robots.txt")
 
     return app
 

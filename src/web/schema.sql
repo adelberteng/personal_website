@@ -7,14 +7,14 @@ DROP TABLE IF EXISTS order;
 DROP TABLE IF EXISTS post;
 
 CREATE TABLE user (
-  uid INTEGER PRIMARY KEY AUTOINCREMENT,
+  uid INTEGER PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(32) UNIQUE NOT NULL,
   password_hash VARCHAR(128) NOT NULL
 );
 
--- shopping cart system 
+shopping cart system 
 CREATE TABLE merchandise (
-  merchandise_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  merchandise_id INTEGER PRIMARY KEY AUTO_INCREMENT,
   owner_id INTEGER NOT NULL,
   price INTEGER NOT NULL,
   stock INTEGER NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE merchandise (
 );
 
 CREATE TABLE order (
-  order_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  order_id INTEGER PRIMARY KEY AUTO_INCREMENT,
   buyer_id INTEGER NOT NULL,
   merchanise_id INTEGER NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -33,15 +33,15 @@ CREATE TABLE order (
 );
 
 -- reservation system
-CREATE TABLE place (
-  place_id INTEGER PRIMARY KEY AUTOINCREMENT,
+-- CREATE TABLE place (
+--   place_id INTEGER PRIMARY KEY AUTOINCREMENT,
   
-);
+-- );
 
-CREATE TABLE reservation (
-  reservation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+-- CREATE TABLE reservation (
+--   reservation_id INTEGER PRIMARY KEY AUTOINCREMENT,
   
-);
+-- );
 
 
 

@@ -7,7 +7,9 @@ from flask import url_for
 from flask import render_template
 from flask import g
 from flask import flash
-from sqlalchemy.engine import url
+from flask import session
+from flask import make_response
+import sqlalchemy
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 
@@ -24,42 +26,49 @@ def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
+            flash("Not logged in, please log in to continue")
             return redirect(url_for("auth.login"))
 
         return view(**kwargs)
 
     return wrapped_view
 
-# @bp.before_app_request
-# def load_logged_in_user():
-#     """If a user id is stored in the session, load the user object from
-#     the database into ``g.user``."""
-#     user_id = session.get("user_id")
+@bp.before_app_request
+def load_logged_in_user():
+    """If a user id is stored in the session, load the user object from
+    the database into ``g.user``."""
+    username = session.get("username")
 
-#     if user_id is None:
-#         g.user = None
-#     else:
-#         g.user = (
-#             get_db().execute("SELECT * FROM user WHERE id = ?", (user_id,)).fetchone()
-#         )
+    if username is None:
+        g.user = None
+    else:
+        g.user = (
+            get_db().execute(
+                f"SELECT username FROM user WHERE username = '{username}'"
+            ).fetchone()[0]
+        )
 
 @bp.route("/login", methods=("GET", "POST"))
 def login():
-    # csrf_enabled=False
     form = LoginForm()
     if request.method == 'POST':
         username = form.username.data
         password = form.password.data
-        # db = g.db
-        # password_hash = db.execute(
-        #     f"SELECT password_hash FROM user WHERE username = '{username}'")
+        db = get_db()
+        password_hash = db.execute(
+            f"SELECT password_hash FROM user WHERE username = '{username}'"
+        ).fetchone()[0]
 
-        # if not check_password_hash(password_hash, password):
-        #     login_warning = "the password is incorrect, please try again."
-        #     return redirect(url_for("login"), login_warning = login_warning)
+        if not check_password_hash(password_hash, password):
+            flash("the password is incorrect, please try again.")
+            return redirect(url_for("auth.login"))
 
+        session['username'] = username
+        session.permanent = True
+        g.user = username
+
+        flash("Login success! Knock youself out!")
         return redirect(url_for("index"))
-
     else:
         return render_template("auth/login.html", form = form)
     
@@ -71,18 +80,26 @@ def register():
         password = form.password.data
         password_repeat = form.password_repeat.data
         if password_repeat != password:
-            not_match_warning = (
+            flash(
                 "Two of your passwords does not match, "
                 "Please retry again."
             )
-            return render_template(
-                "auth/register.html", 
-                form = form, 
-                not_match_warning = not_match_warning
+            return render_template("auth/register.html", form = form)
+
+        db = get_db()
+        try:
+            password_hash = generate_password_hash(password)
+            db.execute(
+                "INSERT INTO user (username, password_hash)"
+                f"VALUES ('{username}', '{password_hash}')"
             )
+        except sqlalchemy.exc.IntegrityError:
+            flash(f"User {username} is already registered.")
+            return render_template("auth/register.html", form = form)
+        except Exception as e:
+            print(e)
 
-        # todo: save user into to db
-
+        flash("Signup success! Please login with your account.")
         return redirect(url_for("auth.login"))
     else:
         return render_template("auth/register.html", form = form)
@@ -96,4 +113,7 @@ def change_password():
 def logout():
     """Clear the current session, including the stored user id."""
     session.clear()
-    return redirect(url_for("index"))
+    flash("logout success!")
+    g.user = None
+    res = make_response(redirect(url_for("index")))
+    return res

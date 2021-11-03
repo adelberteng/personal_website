@@ -3,6 +3,8 @@ from flask import render_template
 from flask import jsonify
 from flask import current_app
 
+from web.auth import login_required
+
 
 def index():
 	return render_template("index.html")
@@ -19,5 +21,6 @@ def blog():
 def linebot_addfd():
 	return render_template("linebot_addfd.html")
 
+@login_required
 def not_implement():
 	return render_template("not_implement.html")
