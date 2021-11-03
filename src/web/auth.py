@@ -43,7 +43,7 @@ def load_logged_in_user():
     else:
         g.user = (
             get_db().execute(
-                f"SELECT username FROM user WHERE username = '{username}'"
+                f"SELECT username FROM user_tbl WHERE username = '{username}'"
             ).fetchone()[0]
         )
 
@@ -56,7 +56,7 @@ def login():
         db = get_db()
 
         password_hash = db.execute(
-            f"SELECT password_hash FROM user WHERE username = '{username}'"
+            f"SELECT password_hash FROM user_tbl WHERE username = '{username}'"
         ).fetchone()
 
         if not password_hash:
@@ -93,7 +93,7 @@ def register():
         try:
             password_hash = generate_password_hash(password)
             db.execute(
-                "INSERT INTO user (username, password_hash)"
+                "INSERT INTO user_tbl (username, password_hash)"
                 f"VALUES ('{username}', '{password_hash}')"
             )
         except sqlalchemy.exc.IntegrityError:
