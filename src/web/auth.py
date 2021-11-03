@@ -19,7 +19,6 @@ from .db import get_db
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
-
 def login_required(view):
     """View decorator that redirects anonymous users to the login page."""
 
@@ -36,7 +35,7 @@ def login_required(view):
 @bp.before_app_request
 def load_logged_in_user():
     """If a user id is stored in the session, load the user object from
-    the database into ``g.user``."""
+    the database into g.user."""
     username = session.get("username")
 
     if username is None:
@@ -55,11 +54,15 @@ def login():
         username = form.username.data
         password = form.password.data
         db = get_db()
+
         password_hash = db.execute(
             f"SELECT password_hash FROM user WHERE username = '{username}'"
-        ).fetchone()[0]
+        ).fetchone()
 
-        if not check_password_hash(password_hash, password):
+        if not password_hash:
+            flash("the username is not exist, please check again.")
+            return redirect(url_for("auth.login"))
+        elif not check_password_hash(password_hash[0], password):
             flash("the password is incorrect, please try again.")
             return redirect(url_for("auth.login"))
 

@@ -5,7 +5,6 @@ from flask import current_app
 
 from web.auth import login_required
 
-
 def index():
 	return render_template("index.html")
 

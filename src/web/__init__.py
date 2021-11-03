@@ -1,10 +1,6 @@
 import os
 
 from flask import Flask
-from flask import send_from_directory
-from flask import request
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect
 
 from web.route import index 
@@ -15,13 +11,8 @@ from web.route import blog
 from web.route import linebot_addfd
 from web import auth
 from web import linebot
-from web.db import init_db
 
 from .config import AppConfig
-
-db = SQLAlchemy()
-# migrate = Migrate()
-
 
 def create_app():
     app = Flask(__name__)
@@ -29,9 +20,6 @@ def create_app():
 
     csrf = CSRFProtect()
     csrf.init_app(app)
-
-    db.init_app(app)
-    # migrate.init_app(app, db)
 
     app.add_url_rule("/", endpoint="index", view_func=index)
     app.add_url_rule("/about", "about", about)
@@ -43,10 +31,4 @@ def create_app():
     app.register_blueprint(auth.bp)
     app.register_blueprint(linebot.bp)
 
-    @app.route('/robots.txt')
-    def static_from_root():
-        return send_from_directory("/robots.txt")
-
     return app
-
-    

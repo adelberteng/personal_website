@@ -1,8 +1,6 @@
 from flask import current_app
 from flask import g
-from flask.cli import with_appcontext
 from sqlalchemy import create_engine
-from sqlalchemy import text
 
 def get_db():
     if "db" not in g:
@@ -19,8 +17,3 @@ def close_db(e=None):
     if db is not None:
         db.close()
 
-def init_db():
-    db = get_db()
-    with current_app.open_resource("schema.sql") as f:
-        sql_text = f.read().decode('utf-8').replace("\n","")
-        db.execute(sql_text)
