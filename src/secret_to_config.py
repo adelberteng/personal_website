@@ -21,7 +21,7 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = service_account_path
 
 project_id = "side-project-317612"
 secret_id = "web_secret"
-version_id = "3"
+version_id = "4"
 name = f"projects/{project_id}/secrets/{secret_id}/versions/{version_id}"
 
 client = secretmanager.SecretManagerServiceClient()

@@ -31,14 +31,11 @@ CREATE TABLE order_tbl (
 -- reservation system
 -- CREATE TABLE place (
 --   place_id INTEGER PRIMARY KEY AUTOINCREMENT,
-  
 -- );
 
 -- CREATE TABLE reservation (
 --   reservation_id INTEGER PRIMARY KEY AUTOINCREMENT,
-  
 -- );
-
 
 
 -- blog system
@@ -48,5 +45,5 @@ CREATE TABLE order_tbl (
 --   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 --   title TEXT NOT NULL,
 --   body TEXT NOT NULL,
---   FOREIGN KEY (author_id) REFERENCES user (id)
+--   FOREIGN KEY (author_id) REFERENCES user_tbl (id)
 -- );

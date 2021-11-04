@@ -3,6 +3,7 @@ from wtforms import StringField
 from wtforms import PasswordField
 from wtforms import SubmitField
 from wtforms.validators import DataRequired
+from wtforms.validators import Length
 
 
 class LoginForm(FlaskForm):
@@ -12,7 +13,8 @@ class LoginForm(FlaskForm):
 
 
 class RegisterForm(FlaskForm):
-	username = StringField("Username", validators=[DataRequired()])
+	username = StringField(
+		"Username", validators=[DataRequired(), Length(max=30)])
 	password = PasswordField("Password", validators=[DataRequired()])
 	password_repeat = PasswordField(
 		"Password Repeat", validators=[DataRequired()])
