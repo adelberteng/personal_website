@@ -10,13 +10,19 @@
 # https://cloud.google.com/community/tutorials/secrets-manager-python
 
 import os
+from sys import platform
 import re
 import ast
 
 from google.cloud import secretmanager
 
+home_path = os.path.expanduser('~')
+if platform == "linux" or platform == "linux2":
+    service_account_path = f"{home_path}/side-project-317612-a3a9fb31513b.json"
+elif platform == "darwin":
+    service_account_path = f"{home_path}/key/side-project-317612-a3a9fb31513b.json"
 
-service_account_path = "/Users/albert/key/side-project-317612-a3a9fb31513b.json"
+
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = service_account_path
 
 project_id = "side-project-317612"
