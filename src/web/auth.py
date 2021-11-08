@@ -112,6 +112,9 @@ def register():
 def change_password():
     pass
 
+def reset_password():
+    pass
+
 @bp.route("/logout")
 def logout():
     """Clear the current session, including the stored user id."""
