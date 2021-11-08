@@ -1,3 +1,5 @@
+import re
+
 from flask import Blueprint
 from flask import request
 from flask import abort
@@ -33,8 +35,19 @@ def callback():
     return 'OK'
 
 
+about_text = """
+hello
+I am albert,
+This is a test.
+"""
+
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
+    message = event.message.text
+    if re.match("@About",message):
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(about_text))
+
+    # line_bot_api.reply_message(
+    #     event.reply_token,
+    #     TextSendMessage(text=event.message.text))
