@@ -17,21 +17,15 @@ bp = Blueprint("linebot", __name__, url_prefix="/linebot")
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
-@bp.route("/callback", methods=['POST'])
+@bp.route("/callback", methods=["POST"])
 def callback():
-    # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
+    signature = request.headers["X-Line-Signature"]
 
-    # get request body as text
     body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
-
-    # handle webhook body
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
-        print(
-			"Invalid signature. Please check your channel access token/channel secret.")
+        print("Invalid signature.")
         abort(400)
 
     return 'OK'
