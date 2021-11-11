@@ -43,6 +43,7 @@ services:
     volumes:
       - ../nginx/nginx.conf:/etc/nginx/nginx.conf
       - /etc/letsencrypt/:/etc/letsencrypt/
+      - ../src/web/static/:/static/
     networks:
       app_network:
         aliases:
