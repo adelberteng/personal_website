@@ -8,7 +8,9 @@ from web.route import not_implement
 from web.route import blog
 from web.route import linebot_addfd
 from web import auth
+from web import shop
 from web import linebot
+
 
 from .config import AppConfig
 
@@ -28,6 +30,8 @@ def create_app():
     app.add_url_rule("/linebot_addfd", "linebot_addfd", linebot_addfd)
 
     app.register_blueprint(auth.bp)
+    app.register_blueprint(shop.bp)
     app.register_blueprint(linebot.bp)
+
 
     return app
