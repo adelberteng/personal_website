@@ -46,6 +46,7 @@ pyvenv.cfg
 .env
 config.ini
 mysql_env
+migrations/*
 
 
 # Unit test / coverage reports
