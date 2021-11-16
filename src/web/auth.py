@@ -10,8 +10,6 @@ from flask import flash
 from flask import session
 from flask import make_response
 import sqlalchemy
-from werkzeug.security import check_password_hash
-from werkzeug.security import generate_password_hash
 
 from web import db
 from .forms import LoginForm
@@ -57,7 +55,6 @@ def login():
         password = form.password.data
 
         user = User.query.filter_by(username=username).first()
-        password_hash = user.password_hash
 
         if not user:
             flash("the username is not exist, please check again.")
@@ -84,25 +81,24 @@ def register():
         password = form.password.data
         password_repeat = form.password_repeat.data
         email = form.email.data
+
         if password_repeat != password:
             flash(
                 "Two of your passwords does not match, "
                 "Please retry again."
             )
             return render_template("auth/register.html", form = form)
-
-        try:
-            new_user = User(username=username, email=email)
-            new_user.set_password(password=password)
-            db.session.add(new_user)
-            db.session.commit()
-
-        except sqlalchemy.exc.IntegrityError:
+        elif User.query.filter_by(username=username).first():
             flash(f"User {username} is already registered.")
             return render_template("auth/register.html", form = form)
-        except Exception:
-            flash(f"something wrong!")
+        elif User.query.filter_by(email=email).first():
+            flash(f"Email address: {email} is already registered.")
             return render_template("auth/register.html", form = form)
+
+        new_user = User(username=username, email=email)
+        new_user.set_password(password=password)
+        db.session.add(new_user)
+        db.session.commit()
 
         flash("Signup success! Please login with your account.")
         return redirect(url_for("auth.login"))
@@ -110,12 +106,12 @@ def register():
         return render_template("auth/register.html", form = form)
         
 
-
+@bp.route("/change_password")
 def change_password():
     """User change password by entry their old password."""
     pass
 
-
+@bp.route("/reset_password")
 def reset_password():
     """If user forget their password, user could reset password by 
     entry their email for verification."""

@@ -13,11 +13,11 @@ def shop():
 	return render_template("shop/shop.html")
 
 
-@bp.route("/merchandise", methods=("GET", "POST"))
+@bp.route("/product", methods=("GET", "POST"))
 @login_required
-def merchandise():
-	merchandise_id = request.args.get('merchandise_id')
-	return render_template("shop/merchandise.html", var = merchandise_id)
+def product():
+	product_id = request.args.get('product_id')
+	return render_template("shop/product.html", var = product_id)
 
 @bp.route("/cart", methods=("GET", "POST"))
 @login_required

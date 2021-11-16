@@ -31,23 +31,23 @@ services:
         aliases:
           - app_network
 
-  nginx:
-    depends_on:
-      - web
-    image: nginx
-    container_name: nginx
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ../nginx/nginx.conf:/etc/nginx/nginx.conf
-      - /etc/letsencrypt/:/etc/letsencrypt/
-      - ../src/web/static/:/static/
-    networks:
-      app_network:
-        aliases:
-          - app_network
+  # nginx:
+  #   depends_on:
+  #     - web
+  #   image: nginx
+  #   container_name: nginx
+  #   restart: always
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ../nginx/nginx.conf:/etc/nginx/nginx.conf
+  #     - /etc/letsencrypt/:/etc/letsencrypt/
+  #     - ../src/web/static/:/static/
+  #   networks:
+  #     app_network:
+  #       aliases:
+  #         - app_network
 
 volumes:
   db_data:

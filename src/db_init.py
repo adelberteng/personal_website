@@ -41,10 +41,10 @@ def create_user_tbl() -> None:
     """
     db.execute(sql_text)
 
-def create_merchandise_tbl() -> None:
+def create_product_tbl() -> None:
     sql_text = """
-        CREATE TABLE merchandise_tbl (
-        merchandise_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+        CREATE TABLE product_tbl (
+        product_id INTEGER PRIMARY KEY AUTO_INCREMENT,
         owner_id INTEGER NOT NULL,
         price INTEGER NOT NULL,
         stock INTEGER NOT NULL,
@@ -71,10 +71,10 @@ def create_order_tbl() -> None:
 
 if __name__ == "__main__":
     drop_table("order_tbl")
-    drop_table("merchandise_tbl")
+    drop_table("product_tbl")
     drop_table("user_tbl")
     create_user_tbl()
-    create_merchandise_tbl()
+    create_product_tbl()
     create_order_tbl()
 
 

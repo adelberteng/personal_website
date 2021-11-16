@@ -26,32 +26,12 @@ class User(db.Model):
 
 
 
-# class Merchandise(db.Model):
-#     __tablename__ = 'merchandise_tbl'
+# class Product(db.Model):
+#     __tablename__ = 'product_tbl'
 #     id = db.Column(db.Integer, primary_key=True)
 #     username = db.Column(db.String(32), unique=True, nullable=False)
 #     password_hash = db.Column(db.String(128), nullable=False)
 
 #     def __repr__(self):
 #         return f"id: {self.id} username: {self.username} password_hash: {self.password_hash}"
-
-
-
-
-
-
-
-# from flask import current_app
-# from flask import g
-# from sqlalchemy import create_engine
-
-# def get_db():
-#     if "db" not in g:
-#         g.db = create_engine(
-#             current_app.config.get("SQLALCHEMY_DATABASE_URI")
-#         )
-
-#     return g.db
-
-
 
