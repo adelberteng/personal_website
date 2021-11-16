@@ -26,23 +26,3 @@ CREATE TABLE order_tbl (
   FOREIGN KEY (buyer_id) REFERENCES user_tbl (uid),
   FOREIGN KEY (merchandise_id) REFERENCES merchandise_tbl (merchandise_id)
 );
-
--- reservation system
--- CREATE TABLE place (
---   place_id INTEGER PRIMARY KEY AUTOINCREMENT,
--- );
-
--- CREATE TABLE reservation (
---   reservation_id INTEGER PRIMARY KEY AUTOINCREMENT,
--- );
-
-
--- blog system
--- CREATE TABLE post (
---   id INTEGER PRIMARY KEY AUTOINCREMENT,
---   author_id INTEGER NOT NULL,
---   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
---   title TEXT NOT NULL,
---   body TEXT NOT NULL,
---   FOREIGN KEY (author_id) REFERENCES user_tbl (id)
--- );

@@ -25,6 +25,10 @@
             {{ form.password_repeat.label }} 
             {{ form.password_repeat(placeholder="entry password again.") }}
         </div>
+        <div class="row mb-3">
+            {{ form.email.label }} 
+            {{ form.email(placeholder="only used by verification when reset password") }}
+        </div>
         <div class="col-auto">
             {{ form.submit() }}
         </div>

@@ -1,5 +1,12 @@
 from flask import Flask
+from flask import g
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect
+
+db = SQLAlchemy()
+migrate = Migrate()
+csrf = CSRFProtect()
 
 from web.route import index 
 from web.route import about
@@ -11,14 +18,15 @@ from web import auth
 from web import shop
 from web import linebot
 
-
 from .config import AppConfig
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(AppConfig)
 
-    csrf = CSRFProtect()
+    db.init_app(app)
+    migrate.init_app(app, db)
+
     csrf.init_app(app)
     csrf.exempt("web.linebot.callback") # csrf will block line callback
 

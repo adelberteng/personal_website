@@ -33,4 +33,4 @@ class AppConfig:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = secret_key
-    PERMANENT_SESSION_LIFETIME = timedelta(days=31)
+    PERMANENT_SESSION_LIFETIME = timedelta(days=1)

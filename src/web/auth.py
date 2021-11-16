@@ -13,9 +13,11 @@ import sqlalchemy
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 
+from web import db
 from .forms import LoginForm
 from .forms import RegisterForm
-from .db import get_db
+from .models import User
+
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -41,28 +43,26 @@ def load_logged_in_user():
     if username is None:
         g.user = None
     else:
+        user = User.query.filter_by(username=username).first()
         g.user = (
-            get_db().execute(
-                "SELECT username FROM user_tbl WHERE username = %s",username
-            ).fetchone()[0]
+            user.username
         )
 
 @bp.route("/login", methods=("GET", "POST"))
 def login():
+    """User login and keep login status by session."""
     form = LoginForm()
     if request.method == 'POST':
         username = form.username.data
         password = form.password.data
-        db = get_db()
 
-        password_hash = db.execute(
-            "SELECT password_hash FROM user_tbl WHERE username = %s",username
-        ).fetchone()
+        user = User.query.filter_by(username=username).first()
+        password_hash = user.password_hash
 
-        if not password_hash:
+        if not user:
             flash("the username is not exist, please check again.")
             return redirect(url_for("auth.login"))
-        elif not check_password_hash(password_hash[0], password):
+        elif not user.check_password(password):
             flash("the password is incorrect, please try again.")
             return redirect(url_for("auth.login"))
 
@@ -77,11 +77,13 @@ def login():
     
 @bp.route("/register", methods=("GET", "POST"))
 def register():
+    """User register and redirect to login page after signup."""
     form = RegisterForm()
     if request.method == 'POST':
         username = form.username.data
         password = form.password.data
         password_repeat = form.password_repeat.data
+        email = form.email.data
         if password_repeat != password:
             flash(
                 "Two of your passwords does not match, "
@@ -89,18 +91,18 @@ def register():
             )
             return render_template("auth/register.html", form = form)
 
-        db = get_db()
         try:
-            password_hash = generate_password_hash(password)
-            db.execute(
-                "INSERT INTO user_tbl (username, password_hash)"
-                "VALUES (%s, %s)", (username, password_hash)
-            )
+            new_user = User(username=username, email=email)
+            new_user.set_password(password=password)
+            db.session.add(new_user)
+            db.session.commit()
+
         except sqlalchemy.exc.IntegrityError:
             flash(f"User {username} is already registered.")
             return render_template("auth/register.html", form = form)
-        except Exception as e:
-            print(e)
+        except Exception:
+            flash(f"something wrong!")
+            return render_template("auth/register.html", form = form)
 
         flash("Signup success! Please login with your account.")
         return redirect(url_for("auth.login"))
@@ -110,10 +112,13 @@ def register():
 
 
 def change_password():
+    """User change password by entry their old password."""
     pass
 
 
 def reset_password():
+    """If user forget their password, user could reset password by 
+    entry their email for verification."""
     pass
 
 

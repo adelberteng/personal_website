@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask import render_template
+from flask import request
 
 from web.auth import login_required
 
@@ -15,7 +16,8 @@ def shop():
 @bp.route("/merchandise", methods=("GET", "POST"))
 @login_required
 def merchandise():
-	pass
+	merchandise_id = request.args.get('merchandise_id')
+	return render_template("shop/merchandise.html", var = merchandise_id)
 
 @bp.route("/cart", methods=("GET", "POST"))
 @login_required
