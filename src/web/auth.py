@@ -14,6 +14,7 @@ import sqlalchemy
 from web import db
 from .forms import LoginForm
 from .forms import RegisterForm
+from .forms import ChangePasswordForm
 from .forms import ResetPasswordForm
 from .models import User
 
@@ -71,6 +72,9 @@ def login():
         flash("Login success! Knock youself out!")
         return redirect(url_for("index"))
     else:
+        if g.user:
+            flash("You already login!")
+            return redirect(url_for("index"))
         return render_template("auth/login.html", form = form)
     
 @bp.route("/register", methods=("GET", "POST"))
@@ -105,12 +109,40 @@ def register():
         return redirect(url_for("auth.login"))
     else:
         return render_template("auth/register.html", form = form)
-        
 
-@bp.route("/change_password")
+@login_required
+@bp.route("/change_password", methods=("GET", "POST"))
 def change_password():
     """User change password by entry their old password."""
-    pass
+    form = ChangePasswordForm()
+    if request.method == 'POST':
+        old_password = form.old_password.data
+        new_password = form.new_password.data
+        new_password_repeat = form.new_password_repeat.data
+
+        username = g.user
+        user = User.query.filter_by(username=username).first()
+        if not user.check_password(old_password):
+            flash("the old password is incorrect, please try again.")
+            return redirect(url_for("auth.change_password"))
+        elif new_password_repeat != new_password:
+            flash(
+                "Two of your passwords does not match, "
+                "Please retry again."
+            )
+            return redirect(url_for("auth.change_password"))
+
+        user.set_password(password=new_password)
+        db.session.add(user)
+        db.session.commit()
+
+        flash("The password has changed! login with the new password next time.")
+        return redirect(url_for("index"))
+
+    else:
+        return render_template("auth/change_password.html", form = form)
+
+
 
 @bp.route("/reset_password", methods=("GET", "POST"))
 def reset_password():
@@ -154,5 +186,5 @@ def logout():
     session.clear()
     flash("logout success!")
     g.user = None
-    res = make_response(redirect(url_for("index")))
-    return res
+
+    return redirect(url_for("index"))

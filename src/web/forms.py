@@ -25,7 +25,7 @@ class RegisterForm(FlaskForm):
 class ChangePasswordForm(FlaskForm):
 	old_password = PasswordField("Old Password", validators=[DataRequired()])
 	new_password = PasswordField("New Password", validators=[DataRequired()])
-	new_passowrd_repeat = PasswordField(
+	new_password_repeat = PasswordField(
 		"New Password Repeat", validators=[DataRequired()])
 	submit = SubmitField("Submit")
 	
