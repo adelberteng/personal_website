@@ -14,6 +14,7 @@ import sqlalchemy
 from web import db
 from .forms import LoginForm
 from .forms import RegisterForm
+from .forms import ResetPasswordForm
 from .models import User
 
 
@@ -111,11 +112,40 @@ def change_password():
     """User change password by entry their old password."""
     pass
 
-@bp.route("/reset_password")
+@bp.route("/reset_password", methods=("GET", "POST"))
 def reset_password():
     """If user forget their password, user could reset password by 
     entry their email for verification."""
-    pass
+    form = ResetPasswordForm()
+    if request.method == 'POST':
+        username = form.username.data
+        email = form.email.data
+        new_password = form.new_password.data
+        new_password_repeat = form.new_password_repeat.data
+
+        user = User.query.filter_by(username=username).first()
+        if not user:
+            flash("the username is not exist, please check again.")
+            return redirect(url_for("auth.reset_password"))
+        elif email != user.email:
+            flash("the email address is not currect, please check again.")
+            return redirect(url_for("auth.reset_password"))
+        elif new_password_repeat != new_password:
+            flash(
+                "Two of your passwords does not match, "
+                "Please retry again."
+            )
+            return redirect(url_for("auth.reset_password"))
+
+        user.set_password(password=new_password)
+        db.session.add(user)
+        db.session.commit()
+
+        flash("Reset success! Please login again.")
+        return redirect(url_for("auth.login"))
+    else:
+        return render_template("auth/reset_password.html", form = form)
+
 
 
 @bp.route("/logout")
