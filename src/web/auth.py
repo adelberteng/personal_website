@@ -90,13 +90,13 @@ def register():
                 "Two of your passwords does not match, "
                 "Please retry again."
             )
-            return render_template("auth/register.html", form = form)
+            return redirect(url_for("auth.register"))
         elif User.query.filter_by(username=username).first():
             flash(f"User {username} is already registered.")
-            return render_template("auth/register.html", form = form)
+            return redirect(url_for("auth.register"))
         elif User.query.filter_by(email=email).first():
             flash(f"Email address: {email} is already registered.")
-            return render_template("auth/register.html", form = form)
+            return redirect(url_for("auth.register"))
 
         new_user = User(username=username, email=email)
         new_user.set_password(password=password)
@@ -134,7 +134,10 @@ def change_password():
         db.session.add(user)
         db.session.commit()
 
-        flash("The password has changed! login with the new password next time.")
+        flash(
+            "The password has changed! "
+            "login with the new password next time."
+        )
         return redirect(url_for("index"))
     else:
         return render_template("auth/change_password.html", form = form)
