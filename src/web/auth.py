@@ -23,15 +23,13 @@ bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 def login_required(view):
     """View decorator that redirects anonymous users to the login page."""
-
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
             flash("Not logged in, please log in to continue")
             return redirect(url_for("auth.login"))
-
+            
         return view(**kwargs)
-
     return wrapped_view
 
 @bp.before_app_request
@@ -138,7 +136,6 @@ def change_password():
 
         flash("The password has changed! login with the new password next time.")
         return redirect(url_for("index"))
-
     else:
         return render_template("auth/change_password.html", form = form)
 
