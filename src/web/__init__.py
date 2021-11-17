@@ -14,6 +14,7 @@ from web.route import this_website
 from web.route import not_implement
 from web.route import blog
 from web.route import linebot_addfd
+from web.route import page_not_found
 from web import auth
 from web import shop
 from web import linebot
@@ -36,6 +37,7 @@ def create_app():
     app.add_url_rule("/not_implement", "not_implement", not_implement)
     app.add_url_rule("/blog", "blog", blog)
     app.add_url_rule("/linebot_addfd", "linebot_addfd", linebot_addfd)
+    app.register_error_handler(404, page_not_found)
 
     app.register_blueprint(auth.bp)
     app.register_blueprint(shop.bp)

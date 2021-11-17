@@ -1,7 +1,5 @@
 # route.py deals with regular page.
 from flask import render_template
-from flask import jsonify
-from flask import current_app
 
 from web.auth import login_required
 
@@ -23,3 +21,6 @@ def linebot_addfd():
 @login_required
 def not_implement():
 	return render_template("not_implement.html")
+
+def page_not_found(e):
+	return render_template("404.html"), 404

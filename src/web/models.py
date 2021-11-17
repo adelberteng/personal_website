@@ -35,3 +35,10 @@ class User(db.Model):
 #     def __repr__(self):
 #         return f"id: {self.id} username: {self.username} password_hash: {self.password_hash}"
 
+
+# class Cart(db.Model):
+#     pass
+
+# class Order(db.Model):
+#     pass
+
