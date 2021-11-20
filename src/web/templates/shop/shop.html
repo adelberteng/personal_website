@@ -7,7 +7,7 @@
 			<div class="card text-center product p-4 pt-5 border-0 h-100 rounded-0">
 				<img class="img-fluid d-block mx-auto" src="{{ url_for('static', filename='img/product/glasses.jpg') }}" alt="Pilot Aviator Glasses Gear Image">
 				<div class="card-body p-4 py-0 h-xs-440p">
-					<h5 class="card-title font-weight-semi-bold mb-3 w-xl-220p mx-auto">Pilot Aviator Glasses</h5>
+					<h2 class="card-title font-weight-semi-bold mb-3 w-xl-220p mx-auto">Pilot Aviator Glasses</h2>
 					<p class="price">$45.00</p>
 				</div>
 				<p class="btn w-100 px-4 mx-auto">
@@ -23,12 +23,13 @@
 			<div class="card text-center product p-4 pt-5 border-0 h-100 rounded-0">
 				<img class="img-fluid d-block mx-auto" src="{{ url_for('static', filename='img/product/hat.jpg') }}" alt="Command Hats Gear Image">
 				<div class="card-body p-4 py-0 h-xs-440p">
-					<h5 class="card-title font-weight-semi-bold mb-3 w-xl-220p mx-auto">Command Hats</h5>
+					<h2 class="card-title font-weight-semi-bold mb-3 w-xl-220p mx-auto">Command Hats</h2>
 					<p class="price">$15.00</p>
 				</div>
 				<p class="btn w-100 px-4 text-center mx-auto">
 					<form action="{{ url_for('shop.product') }}">
 						<input type="submit" class="btn btn-dark btn-lg w-100" name="add-button" value="Buy Now">
+						<input type="hidden" name="product_id" value="hat">
 					</form>
 				</p>
 			</div>
@@ -38,12 +39,13 @@
 			<div class="card text-center product p-4 pt-5 border-0 h-100 rounded-0">
 				<img class="img-fluid d-block mx-auto" src="{{ url_for('static', filename='img/product/tshirt.jpg') }}" alt="Mission T-Shirts Gear Image">
 				<div class="card-body p-4 py-0 h-xs-440p">
-					<h5 class="card-title font-weight-semi-bold mb-3 w-xl-220p mx-auto">Mission T-Shirts</h5>
+					<h2 class="card-title font-weight-semi-bold mb-3 w-xl-220p mx-auto">Mission T-Shirts</h2>
 					<p class="price">$25.00</p>
 				</div>
 				<p class="btn w-100 px-4 mx-auto">
 					<form action="{{ url_for('shop.product') }}">
 						<input type="submit" class="btn btn-dark btn-lg w-100" name="add-button" value="Buy Now">
+						<input type="hidden" name="product_id" value="tshirt">
 					</form>
 				</p>
 			</div>

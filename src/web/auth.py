@@ -25,7 +25,7 @@ def login_required(view):
     """View decorator that redirects anonymous users to the login page."""
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        if g.user is None:
+        if g.uid is None:
             flash("Not logged in, please log in to continue")
             return redirect(url_for("auth.login"))
             
@@ -36,15 +36,15 @@ def login_required(view):
 def load_logged_in_user():
     """If a user id is stored in the session, load the user object from
     the database into g.user."""
-    username = session.get("username")
+    uid = session.get("uid")
 
-    if username is None:
-        g.user = None
+    if uid is None:
+        g.uid = None
     else:
-        user = User.query.filter_by(username=username).first()
-        g.user = (
-            user.username
-        )
+        user = User.query.filter_by(uid=uid).first()
+        g.uid = user.uid
+        g.username = user.username
+        
 
 @bp.route("/login", methods=("GET", "POST"))
 def login():
@@ -63,14 +63,14 @@ def login():
             flash("the password is incorrect, please try again.")
             return redirect(url_for("auth.login"))
 
-        session['username'] = username
+        session['uid'] = user.uid
         session.permanent = True
-        g.user = username
+        g.uid = user.uid
 
         flash("Login success! Knock youself out!")
         return redirect(url_for("index"))
     else:
-        if g.user:
+        if g.uid:
             flash("You already login!")
             return redirect(url_for("index"))
         return render_template("auth/login.html", form = form)
@@ -118,8 +118,8 @@ def change_password():
         new_password = form.new_password.data
         new_password_repeat = form.new_password_repeat.data
 
-        username = g.user
-        user = User.query.filter_by(username=username).first()
+        uid = g.uid
+        user = User.query.filter_by(uid=uid).first()
         if not user.check_password(old_password):
             flash("the old password is incorrect, please try again.")
             return redirect(url_for("auth.change_password"))
@@ -134,11 +134,14 @@ def change_password():
         db.session.add(user)
         db.session.commit()
 
+        session.clear()
+        g.user = None
+
         flash(
             "The password has changed! "
-            "login with the new password next time."
+            "Please login again."
         )
-        return redirect(url_for("index"))
+        return redirect(url_for("auth.login"))
     else:
         return render_template("auth/change_password.html", form = form)
 
