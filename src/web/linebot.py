@@ -96,7 +96,27 @@ linebot_response_dict = {
                 ]
             )
         )
-
+    ),
+    "@sentiment": (
+        TextSendMessage(
+            text = (
+                "輿情系統： \n"
+            )
+        )
+    ),
+    "@smart-health": (
+        TextSendMessage(
+            text = (
+                "智慧醫療： \n"
+            )
+        )
+    ),
+    "@website": (
+        TextSendMessage(
+            text = (
+                "個人網站： \n"
+            )
+        )
     ),
     "@Contact": (
         TemplateSendMessage(
@@ -117,10 +137,6 @@ linebot_response_dict = {
                     MessageTemplateAction(
                         label="Github",
                         text="https://github.com/adelberteng"
-                    ),
-                    MessageTemplateAction(  
-                        label="Personal website",
-                        text="https://www.albertteng.xyz"
                     )
                 ]
             )
