@@ -78,7 +78,7 @@ linebot_response_dict = {
             alt_text="作品集",
             template=ButtonsTemplate(
                 thumbnail_image_url="https://i.imgur.com/edDMW7i.png",
-                title="我的作品集",
+                title="我的作品集簡介",
                 text="請選擇：",
                 actions=[
                     MessageTemplateAction(
@@ -101,6 +101,9 @@ linebot_response_dict = {
         TextSendMessage(
             text = (
                 "輿情系統： \n"
+                "為幫助電商子公司了解市場風向，掌握競品聲量等目的，"
+                "以爬蟲及第三方資料來源作為Raw data，經過NLP模型處理後存入Elasticsearch作為搜尋引擎，"
+                "架設ES叢集於AWS EC2上，並以Kibana作為商業分析的探勘工具。"
             )
         )
     ),
@@ -108,6 +111,9 @@ linebot_response_dict = {
         TextSendMessage(
             text = (
                 "智慧醫療： \n"
+                "子公司APP的主要功能之一，由APP串接此專案的後端API，即時運算健康相關分數。\n"
+                "專案部署於AWS serverless的架構上，API用Python Flask開發並使用ECS提供服務，"
+                "以MongoDB作為後端資料庫，Redis應用於Cache以減輕資料庫壓力。"
             )
         )
     ),
@@ -115,7 +121,17 @@ linebot_response_dict = {
         TextSendMessage(
             text = (
                 "個人網站： \n"
+                "作為自己架設網站的Side Project，期待提供一個認識我的機會，"
+                "個人的Blog與聯繫方式等資料也會放在上面，"
+                "其他的side project會以此網站為出發點，在未來持續更新。"
             )
+        )
+    ),
+    "@autobiography": (
+        TextSendMessage(
+            text = """
+            
+            """
         )
     ),
     "@Contact": (
