@@ -129,9 +129,9 @@ linebot_response_dict = {
     ),
     "@autobiography": (
         TextSendMessage(
-            text = """
-            
-            """
+            text = (
+                ""
+            )
         )
     ),
     "@Contact": (
