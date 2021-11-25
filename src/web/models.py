@@ -25,13 +25,12 @@ class User(db.Model):
         return check_password_hash(self.password_hash, password)
 
 
-
 class Product(db.Model):
     __tablename__ = 'product_tbl'
     product_id = db.Column(db.Integer, primary_key=True)
     product_name = db.Column(db.String(32), unique=True, nullable=False)
     product_img_path = db.Column(db.String(128))
-    product_detail = db.Column(db.String(128))
+    product_detail = db.Column(db.String(512))
     price =  db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
@@ -48,7 +47,8 @@ class Cart(db.Model):
     uid = db.Column(db.Integer,  nullable=False, index=True)
     product_id = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer,  nullable=False)
-    status = db.Column(db.BOOLEAN) # True is added in order.
+    product_name = db.relationship('Product', backref='product_name', lazy=True)
+    price = db.relationship('Product', backref='price', lazy=True)
 
 
 class Order(db.Model):
@@ -62,4 +62,6 @@ class OrderDetail(db.Model):
     __tablename__ = 'order_detail_tbl'
     order_item_id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer,  nullable=False)
+    quantity = db.Column(db.Integer,  nullable=False)
+
 

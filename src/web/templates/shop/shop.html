@@ -11,9 +11,10 @@
 					<p class="price">$45.00</p>
 				</div>
 				<p class="btn w-100 px-4 mx-auto">
-					<form action="{{ url_for('shop.product') }}">
+					<form method="post" action="{{ url_for('shop.product') }}">
+						<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 						<input type="submit" class="btn btn-dark btn-lg w-100" name="add-button" value="Buy Now">
-						<input type="hidden" name="product_id" value="glasses">
+						<input type="hidden" name="product_id" value=1>
 					</form>
 				</p>
 			</div>
@@ -27,9 +28,10 @@
 					<p class="price">$15.00</p>
 				</div>
 				<p class="btn w-100 px-4 text-center mx-auto">
-					<form action="{{ url_for('shop.product') }}">
+					<form method="post" action="{{ url_for('shop.product') }}">
+						<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 						<input type="submit" class="btn btn-dark btn-lg w-100" name="add-button" value="Buy Now">
-						<input type="hidden" name="product_id" value="hat">
+						<input type="hidden" name="product_id" value=2>
 					</form>
 				</p>
 			</div>
@@ -43,9 +45,10 @@
 					<p class="price">$25.00</p>
 				</div>
 				<p class="btn w-100 px-4 mx-auto">
-					<form action="{{ url_for('shop.product') }}">
+					<form method="post" action="{{ url_for('shop.product') }}">
+						<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 						<input type="submit" class="btn btn-dark btn-lg w-100" name="add-button" value="Buy Now">
-						<input type="hidden" name="product_id" value="tshirt">
+						<input type="hidden" name="product_id" value=3>
 					</form>
 				</p>
 			</div>

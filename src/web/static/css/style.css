@@ -204,6 +204,25 @@ nav li {
 	text-align: center !important;
 }
 
+.product-page {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.cart-table table, th, td {
+	font-size: 25px;
+	padding: 10px;
+	border:1px solid black;
+}
+
+.cart-table th {
+	font-size:30px;
+	font-weight: bold;
+}
+
+
 
 .footer {
 	margin-top: 10%;

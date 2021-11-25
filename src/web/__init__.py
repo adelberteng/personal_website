@@ -29,7 +29,7 @@ def create_app():
     migrate.init_app(app, db)
 
     csrf.init_app(app)
-    csrf.exempt("web.linebot.callback") # csrf will block line callback
+    csrf.exempt("web.linebot.callback") # csrf will block Line callback
 
     app.add_url_rule("/", endpoint="index", view_func=index)
     app.add_url_rule("/about", "about", about)

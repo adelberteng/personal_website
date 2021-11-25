@@ -1,7 +1,33 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	<h1>Product Page</h1>
-	<p>{{ var }}</p>
+    <h1>Product Page</h1>
+    <div class="product-page">
+        <div>
+            <img class="rounded mx-auto d-block" src="{{ url_for('static', filename=product.product_img_path) }}" alt="product img" width="60%">
+        </div>
+        <div>
+            <h1 class="display-2"> Product Name: {{ product.product_name }}</h1>
+            <h2>Price:  ${{ product.price }}</h2>
+            <p>{{ product.product_detail }}</p>
 
+            <form method="post" action="{{ url_for('shop.cart') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="product_id" value=" {{product.product_id}} ">
+                <p>Select the quantity:</p>
+                <input type="range" min="1" max="100" name="quantity" value="1" class="slider" id="quantityRange">
+                <p>Quantity: <span id="quantity"></span></p>
+                <script>
+                    var slider = document.getElementById("quantityRange");
+                    var output = document.getElementById("quantity");
+                    output.innerHTML = slider.value;
+                    slider.oninput = function() {
+                        output.innerHTML = this.value;
+                    }
+                </script>
+                <input type="submit" class="btn btn-dark btn-lg w-100" name="button-name" value="Add to cart!">
+            </form>
+            
+        </div>
+    </div>
 {% endblock %}
