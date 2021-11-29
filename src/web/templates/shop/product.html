@@ -2,19 +2,20 @@
 
 {% block content %}
     <h1>Product Page</h1>
+    <br>
     <div class="product-page">
         <div>
-            <img class="rounded mx-auto d-block" src="{{ url_for('static', filename=product.product_img_path) }}" alt="product img" width="60%">
+            <img class="rounded mx-auto d-block" src="{{ url_for('static', filename=product.product_img_path) }}" alt="product_img" width="60%">
         </div>
         <div>
             <h1 class="display-2"> Product Name: {{ product.product_name }}</h1>
             <h2>Price:  ${{ product.price }}</h2>
+            <h3>description:</h3>
             <p>{{ product.product_detail }}</p>
-
             <form method="post" action="{{ url_for('shop.cart') }}">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="product_id" value=" {{product.product_id}} ">
-                <p>Select the quantity:</p>
+                <h3>Select the quantity:</h3>
                 <input type="range" min="1" max="100" name="quantity" value="1" class="slider" id="quantityRange">
                 <p>Quantity: <span id="quantity"></span></p>
                 <script>
@@ -27,7 +28,6 @@
                 </script>
                 <input type="submit" class="btn btn-dark btn-lg w-100" name="button-name" value="Add to cart!">
             </form>
-            
         </div>
     </div>
 {% endblock %}

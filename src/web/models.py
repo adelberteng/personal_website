@@ -33,6 +33,9 @@ class Product(db.Model):
     product_detail = db.Column(db.String(512))
     price =  db.Column(db.Integer, nullable=False)
 
+    product_in_cart = db.relationship("Cart", backref="product", lazy="select")
+
+
     def __repr__(self):
         return (
             f"product_id: {self.product_id} product_name: {self.product_name}"
@@ -45,10 +48,8 @@ class Cart(db.Model):
     __tablename__ = 'cart_tbl'
     cart_item_id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer,  nullable=False, index=True)
-    product_id = db.Column(db.Integer, nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('product_tbl.product_id'))
     quantity = db.Column(db.Integer,  nullable=False)
-    product_name = db.relationship('Product', backref='product_name', lazy=True)
-    price = db.relationship('Product', backref='price', lazy=True)
 
 
 class Order(db.Model):
