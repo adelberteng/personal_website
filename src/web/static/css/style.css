@@ -123,7 +123,7 @@ nav li {
 	padding-right: 50px;
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-end;
+	justify-content: flex-start;
 	font-size: 30px;
 }
 

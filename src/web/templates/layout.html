@@ -59,7 +59,6 @@
 								<li><a class="dropdown-item" href="{{ url_for('auth.login') }}">Login / Signup</a></li>
 							{% endif %}
 							<li><a class="dropdown-item" href="{{ url_for('shop.shop') }}">Shopping Cart</a></li>
-							<!-- <li><a class="dropdown-item" href="{{ url_for('not_implement') }}">Reservation System</a></li> -->
 							<li><a class="dropdown-item" href="{{ url_for('linebot_addfd') }}">Linebot</a></li>
 						</ul>
 					</li>
@@ -94,7 +93,7 @@
 	</nav>	
 	{% if g.username %}
 		<div id="user-hello">
-			<p">Hello! {{ g.username }}</p>
+			<p>Hello! {{ g.username }}</p>
 		</div>
 	{% endif %}
 	<div class="content">
