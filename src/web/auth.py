@@ -16,8 +16,8 @@ from .forms import ChangePasswordForm
 from .forms import ResetPasswordForm
 from .models import User
 
-
 bp = Blueprint("auth", __name__, url_prefix="/auth")
+
 
 def login_required(view):
     """View decorator that redirects anonymous users to the login page."""
@@ -42,7 +42,6 @@ def load_logged_in_user():
         user = User.query.filter_by(uid=uid).first()
         g.uid = user.uid
         g.username = user.username
-        
 
 @bp.route("/login", methods=("GET", "POST"))
 def login():
@@ -72,7 +71,7 @@ def login():
             flash("You already login!")
             return redirect(url_for("index"))
         return render_template("auth/login.html", form = form)
-    
+
 @bp.route("/register", methods=("GET", "POST"))
 def register():
     """User register and redirect to login page after signup."""
@@ -143,8 +142,6 @@ def change_password():
     else:
         return render_template("auth/change_password.html", form = form)
 
-
-
 @bp.route("/reset_password", methods=("GET", "POST"))
 def reset_password():
     """If user forget their password, user could reset password by 
@@ -178,8 +175,6 @@ def reset_password():
         return redirect(url_for("auth.login"))
     else:
         return render_template("auth/reset_password.html", form = form)
-
-
 
 @bp.route("/logout")
 def logout():
