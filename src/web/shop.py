@@ -70,7 +70,6 @@ def order_check():
             item_total_price = item.product.price * item.quantity
             total_amount += item_total_price
 
-
         return render_template(
             "shop/order_check.html", 
             cart_items=cart_items, 

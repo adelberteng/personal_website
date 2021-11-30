@@ -8,8 +8,6 @@ from flask import render_template
 from flask import g
 from flask import flash
 from flask import session
-from flask import make_response
-import sqlalchemy
 
 from web import db
 from .forms import LoginForm

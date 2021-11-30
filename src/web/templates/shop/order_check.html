@@ -2,7 +2,7 @@
 
 {% block content %}
 	<h1>Order Checking</h1>
-	<h2>check your items before you set up the order.</h2>
+	<h2 style="text-align: center;">check your items before you set up the order!</h2>
 	{% if cart_items %}
     <form method="post" action="{{ url_for('shop.order') }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
