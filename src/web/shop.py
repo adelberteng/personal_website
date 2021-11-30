@@ -101,6 +101,8 @@ def order():
         db.session.commit()
 
         product_confirm_list = request.form.getlist("buy_check")
+        if not product_confirm_list:
+            return redirect(url_for("shop.order"))
 
         cart_items = Cart.query.filter_by(uid=g.uid).\
             filter(Cart.product_id.in_(product_confirm_list)).all()
@@ -118,7 +120,7 @@ def order():
 
         db.session.commit()
 
-        return render_template("shop/order.html", data=product_confirm_list)
+        return redirect(url_for("shop.order"))
     
     # view order list
     orders = Order.query.filter_by(uid=g.uid).all()
