@@ -6,6 +6,27 @@ https://www.albertteng.xyz
 
 <br />
 
+
+<!-- TABLE OF CONTENTS -->
+
+<summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+<ol>
+  <li>
+    <a href="#about-the-project">About The Project</a>
+  </li>
+  <li>
+    <a href="#getting-started">Getting Started</a>
+    <ul>
+      <li><a href="#prerequisites">Prerequisites</a></li>
+      <li><a href="#build-and-run">Build and run</a></li>
+    </ul>
+  </li>
+  <li><a href="#usage">Usage</a></li>
+  <li><a href="#contact">Contact</a></li>
+</ol>
+
+<br>
+
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 ---
@@ -30,14 +51,19 @@ https://www.albertteng.xyz
 <!-- GETTING STARTED -->
 ## Getting Started
 ---
-
 ### Prerequisites
+make sure you have installed Python and Docker before started.
+
+
+### Build and Run
+Use docker-compose to build and run this application.
 
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 ---
+About my project usage, I suggest to read 
 
 
 
