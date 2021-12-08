@@ -130,7 +130,7 @@ linebot_response_dict = {
     "@autobiography": (
         TextSendMessage(
             text = (
-                ""
+                "有機會的話可以當面聊聊我的故事～"
             )
         )
     ),
