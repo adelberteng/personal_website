@@ -24,10 +24,9 @@ def shop():
     return render_template("shop/shop.html")
 
 
-@bp.route("/product", methods=("GET", "POST"))
+@bp.route("/products/<product_id>", methods=("GET", "POST"))
 @login_required
-def product():
-    product_id = request.form.get('product_id')
+def products(product_id):
     product = Product.query.filter_by(product_id=product_id).first()
 
     return render_template("shop/product.html", product=product)
