@@ -35,7 +35,7 @@ def create_app():
     app.add_url_rule("/about", "about", about)
     app.add_url_rule("/this_website", "this_website", this_website)
     app.add_url_rule("/not_implement", "not_implement", not_implement)
-    app.add_url_rule("/blog", "blog", blog)
+    # app.add_url_rule("/blog", "blog", blog)
     app.add_url_rule("/linebot_addfd", "linebot_addfd", linebot_addfd)
     app.register_error_handler(404, page_not_found)
 

@@ -12,8 +12,8 @@ def about():
 def this_website():
 	return render_template("this_website.html")
 
-def blog():
-	return render_template("blog.html")
+# def blog():
+# 	return render_template("blog.html")
 
 def linebot_addfd():
 	return render_template("linebot_addfd.html")
